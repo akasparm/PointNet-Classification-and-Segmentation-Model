@@ -48,3 +48,9 @@ Deliverables: On your website, for each experiment
 - Describe your procedure 
 - For each task, report test accuracy and visualization on a few samples, in comparison with your results from Q1 & Q2.
 - Provide some interpretation in a few sentences.
+
+## Reminder
+If your job get killed during evaluation, it's mostly because the CPU runs out of memory.
+You can either try:
+1. Use a larger memory for your GPU. Change the memory size for the on demand GPU.
+2. Take a smaller batch size for the test data.
