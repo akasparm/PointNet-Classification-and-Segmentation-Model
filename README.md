@@ -52,8 +52,9 @@ Deliverables: On your website, for each experiment
 ## Reminder
 If your job get killed during evaluation, it's mostly because the CPU runs out of memory.
 You can either try:
-1. Use a larger memory for your GPU. Change the memory size for the on demand GPU.
+1. Take a smaller batch size for the test data.
+2. Use a larger memory for your GPU. Change the memory size for the on demand GPU.
 	
 	srun --pty --partition=class --account=class --mem=64gb --qos=high --gres=gpu:1 bash	
 
-2. Take a smaller batch size for the test data.
+
