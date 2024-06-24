@@ -1,0 +1,249 @@
+<meta charset="utf-8" emacsmode="-- markdown -">
+*CMSC848F - Assignment 4*
+
+*Submitted By: Akashkumar Parmar*
+
+*UID: 118737430*
+
+*PointNet Based Architecture*
+
+Classification Model
+===============================================================================
+
+Model's best accuracy achieved: 0.9727
+
+Visualization of a few random test point clouds and the predicted classes for each:
+
+
+<pre>
+        Point Clouds                 Ground Truth class                Predicted class     
+</pre>
+
+<pre>
+<img src="q1_output/1. random_vis_27_with_gt_0_pred_0.gif" alt="Ray Visualization" width="220">              Chair                         Chair
+
+
+
+<img src="q1_output/1. random_vis_97_with_gt_0_pred_0.gif" alt="Ray Visualization" width="220">              Chair                         Chair
+
+
+
+<img src="q1_output/1. random_vis_654_with_gt_1_pred_1.gif" alt="Ray Visualization" width="220">             Vase                          Vase
+
+
+
+<img src="q1_output/1. random_vis_816_with_gt_2_pred_2.gif" alt="Ray Visualization" width="220">             Lamp                          Lamp
+
+
+Visualization of wrong class prediction:
+
+
+<img src="q1_output/1.1 fail_vis_tensor([716])_with_gt_tensor([1])_pred_tensor([2]).gif" alt="Ray Visualization" width="220">             Vase                          Lamp
+
+
+
+<img src="q1_output/1.1 fail_vis_tensor([922])_with_gt_tensor([2])_pred_tensor([1]).gif" alt="Ray Visualization" width="220">             Lamp                          Vase
+
+</pre>
+
+<p>
+Interpretation:
+        The Classification model performance is overall good. It is only failing for some objects that seem to be very close to another class. 
+        For instance, the vase is having a shape of lamp, and the lamp is having a lot of similaries with a flower vase. 
+        Therefore, such images are ambiguous for the model and makes the model to mispredict.
+
+</p>
+
+
+Segmentation Model
+===============================================================================
+
+Model's best accuracy achieved: 0.8888
+
+Visualization of a few Segmentation results with corresponding ground truth:
+
+
+<pre>
+        Ground Truth                 Prediction                 Accuracy     
+</pre>
+
+<pre>
+
+        
+<img src="q2_output/2. random_vis_91_gt_exp_acc0.9725.gif" alt="Ray Visualization" width="220"> <img src="q2_output/2. random_vis_91_pred_exp.gif" alt="Ray Visualization" width="220">           0.9725
+
+
+<img src="q2_output/2. random_vis_131_gt_exp_acc0.9515.gif" alt="Ray Visualization" width="220"> <img src="q2_output/2. random_vis_131_pred_exp.gif" alt="Ray Visualization" width="220">           0.9515
+
+
+<img src="q2_output/2. random_vis_187_gt_exp_acc0.9506.gif" alt="Ray Visualization" width="220"> <img src="q2_output/2. random_vis_187_pred_exp.gif" alt="Ray Visualization" width="220">           0.9506
+
+Segmentation of Bad Prediction with lower accuracy:
+
+<img src="q2_output/2. random_vis_225_gt_exp_acc0.5632.gif" alt="Ray Visualization" width="220"> <img src="q2_output/2. random_vis_225_pred_exp.gif" alt="Ray Visualization" width="220">           0.5632
+
+
+<img src="q2_output/2. random_vis_41_gt_exp_acc0.6494.gif" alt="Ray Visualization" width="220"> <img src="q2_output/2. random_vis_41_pred_exp.gif" alt="Ray Visualization" width="220">           0.6494
+
+</pre>
+
+<p>
+Interpretation:
+        The Segmentation model performance is overall good. It is only failing for some objects that are difficult to segment. 
+        For instance, there are some bad performaed cases for large overlaps between different parts of the sofa, or between those parts that are not clearly seperated. 
+        Therefore, such images are ambiguous for the model and makes it very difficult for the model to segment clearly.
+        
+</p>
+        
+
+Robustness Analysis
+===============================================================================
+
+Experiment 1: Rotate the input point clouds
+-------------------------------------------------------------------------------
+
+<pre>
+
+Classification Visualization:
+
+Rotation Angle   Visualization    Ground Truth class   Predicted class   Accuracy
+
+      0         <img src="q3_output/rotation_change/1. id_11_angle_0_with_gt_0_pred_0_acc_0.8289611752360966.gif" alt="Ray Visualization" width="120">           Chair             Chair         0.8289
+
+        
+
+      10        <img src="q3_output/rotation_change/1. id_11_angle_10_with_gt_0_pred_0_acc_0.8216159496327388.gif" alt="Ray Visualization" width="120">           Chair             Chair         0.8216
+
+        
+
+      20        <img src="q3_output/rotation_change/1. id_11_angle_20_with_gt_0_pred_2_acc_0.6075550891920252.gif" alt="Ray Visualization" width="120">           Chair             Lamp          0.6075
+
+        
+
+      30        <img src="q3_output/rotation_change/1. id_11_angle_30_with_gt_0_pred_1_acc_0.3410283315844701.gif" alt="Ray Visualization" width="120">           Chair             Vase          0.3410
+
+        
+
+      40        <img src="q3_output/rotation_change/1. id_11_angle_40_with_gt_0_pred_1_acc_0.27177334732423925.gif" alt="Ray Visualization" width="120">           Chair             Vase          0.2717
+
+        
+
+      90        <img src="q3_output/rotation_change/1. id_11_angle_90_with_gt_0_pred_1_acc_0.2203567681007345.gif" alt="Ray Visualization" width="120">           Chair             Vase          0.2203
+
+        
+
+      180       <img src="q3_output/rotation_change/1. id_11_angle_180_with_gt_0_pred_1_acc_0.5005246589716684.gif" alt="Ray Visualization" width="120">           Chair             Vase          0.5005
+
+
+Segmentation Visualization:
+
+Rotation Angle   Ground Truth     Prediction            Accuracy
+
+      0         <img src="q3_output/rotation_change/2. id_111_angle0_gt_exp_acc0.7693.gif" alt="Ray Visualization" width="120"> <img src="q3_output/rotation_change/2. id_111_angle0_pred_exp.gif" alt="Ray Visualization" width="120">           0.7693
+
+                
+
+      10        <img src="q3_output/rotation_change/2. id_111_angle10_gt_exp_acc0.6578.gif" alt="Ray Visualization" width="120"> <img src="q3_output/rotation_change/2. id_111_angle10_pred_exp.gif" alt="Ray Visualization" width="120">           0.6578
+
+                
+
+      20        <img src="q3_output/rotation_change/2. id_111_angle0_gt_exp_acc0.7693.gif" alt="Ray Visualization" width="120"> <img src="q3_output/rotation_change/2. id_111_angle20_pred_exp.gif" alt="Ray Visualization" width="120">           0.5727
+
+                
+
+      30        <img src="q3_output/rotation_change/2. id_111_angle10_gt_exp_acc0.6578.gif" alt="Ray Visualization" width="120"> <img src="q3_output/rotation_change/2. id_111_angle30_pred_exp.gif" alt="Ray Visualization" width="120">           0.5420
+
+                
+
+      40        <img src="q3_output/rotation_change/2. id_111_angle0_gt_exp_acc0.7693.gif" alt="Ray Visualization" width="120"> <img src="q3_output/rotation_change/2. id_111_angle40_pred_exp.gif" alt="Ray Visualization" width="120">           0.5360
+
+                
+
+      90        <img src="q3_output/rotation_change/2. id_111_angle10_gt_exp_acc0.6578.gif" alt="Ray Visualization" width="120"> <img src="q3_output/rotation_change/2. id_111_angle90_pred_exp.gif" alt="Ray Visualization" width="120">           0.3240
+
+                
+
+      180       <img src="q3_output/rotation_change/2. id_111_angle0_gt_exp_acc0.7693.gif" alt="Ray Visualization" width="120"> <img src="q3_output/rotation_change/2. id_111_angle180_pred_exp.gif" alt="Ray Visualization" width="120">           0.2420
+
+</pre>
+
+<p>
+Interpretation:
+        From the results, we can tell that the test accuracies decrease for both the Classification and Segmentation models. 
+        For Classification model, the model performs poorly when the angle is increased. However, at 180° the model showed a better accuracy, because the
+        chair looks like a chair, it is just inverted. 
+        For the Segmentation model, the accuracies fall with the increase in angle. 
+                
+</p>
+
+
+
+Experiment 2: Change number of points
+-------------------------------------------------------------------------------
+
+<pre>
+
+Classification Visualization:
+
+Number of Points   Visualization    Ground Truth class   Predicted class    Accuracy
+
+      50         <img src="q3_output/num_points_change/1. id_50_with_gt_0_pred_2_acc_0.304302203567681.gif" alt="Ray Visualization" width="120">           Chair             Lamp            0.3034
+
+        
+
+      100        <img src="q3_output/num_points_change/1. id_100_with_gt_0_pred_2_acc_0.5519412381951732.gif" alt="Ray Visualization" width="120">           Chair             Lamp            0.5519
+
+        
+
+      500        <img src="q3_output/num_points_change/1. id_500_with_gt_0_pred_0_acc_0.8006295907660022.gif" alt="Ray Visualization" width="120">           Chair             Chair           0.8006
+
+        
+
+      1000       <img src="q3_output/num_points_change/1. id_1000_with_gt_0_pred_0_acc_0.8289611752360966.gif" alt="Ray Visualization" width="120">           Chair             Chair           0.8289
+
+        
+
+      5000       <img src="q3_output/num_points_change/1. id_5000_with_gt_0_pred_0_acc_0.8331584470094439.gif" alt="Ray Visualization" width="120">           Chair             Chair           0.8331
+
+        
+
+      10000      <img src="q3_output/num_points_change/1. id_10000_with_gt_0_pred_0_acc_0.8289611752360966.gif" alt="Ray Visualization" width="120">           Chair             Chair           0.8289
+
+
+Segmentation Visualization:
+
+Number of Points   Ground Truth     Prediction            Accuracy
+
+      50        <img src="q3_output/num_points_change/2. id_133_num50_gt_exp_acc0.94.gif" alt="Ray Visualization" width="120"> <img src="q3_output/num_points_change/2. id_133_num50_pred_exp.gif" alt="Ray Visualization" width="120">           0.8845
+
+                
+
+      100       <img src="q3_output/num_points_change/2. id_133_num100_pred_exp.gif" alt="Ray Visualization" width="120"> <img src="q3_output/num_points_change/2. id_133_num100_pred_exp.gif" alt="Ray Visualization" width="120">           0.8856
+
+                
+
+      500       <img src="q3_output/num_points_change/2. id_133_num500_gt_exp_acc0.896.gif" alt="Ray Visualization" width="120"> <img src="q3_output/num_points_change/2. id_133_num500_pred_exp.gif" alt="Ray Visualization" width="120">           0.8870
+
+                
+
+      1000      <img src="q3_output/num_points_change/2. id_133_num1000_gt_exp_acc0.887.gif" alt="Ray Visualization" width="120"> <img src="q3_output/num_points_change/2. id_133_num1000_pred_exp.gif" alt="Ray Visualization" width="120">           0.8960
+
+                
+
+      5000      <img src="q3_output/num_points_change/2. id_133_num5000_gt_exp_acc0.8856.gif" alt="Ray Visualization" width="120"> <img src="q3_output/num_points_change/2. id_133_num5000_pred_exp.gif" alt="Ray Visualization" width="120">           0.9200
+
+                
+
+      10000     <img src="q3_output/num_points_change/2. id_133_num10000_gt_exp_acc0.8845.gif" alt="Ray Visualization" width="120"> <img src="q3_output/num_points_change/2. id_133_num10000_pred_exp.gif" alt="Ray Visualization" width="120">           0.9400
+
+</pre>
+
+<p>     
+Interpretation:
+        From the results, it is evident that with number of points, the accuracy increases for both the tasks - Classificationa and Segmentation.
+        However, it is seen that after certain number of points, the accuracy gets stagnant and number of points is not an effective parameter then. 
+        For instance, in the Classification task the accuracy is about 0.82-0.83 for the number of points more than 1000.
+        Also, it is the same case for class prediction. After, 1000 points, the model predicts the correct class. 
+</p>
+
+<!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="markdeep.min.js" charset="utf-8"></script><script src="https://morgan3d.github.io/markdeep/latest/markdeep.min.js?" charset="utf-8"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>
